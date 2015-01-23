@@ -1,0 +1,7 @@
+FactoryGirl.define do
+	factory :idea do
+		name "rogers"
+		description "Alpha"
+		value 1000
+	end
+end

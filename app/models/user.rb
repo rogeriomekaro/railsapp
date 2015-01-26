@@ -3,4 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+   belongs_to :idea
+   belongs_to :comment
+   
+   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/, message:"Email should contain @"}
+   validates :name, :last_name, format: {with: /\A[a-z,A-Z]+\z/,message:"Only letters are valid"}
+   
+   def get_full_name
+   		self.name + " " + self.last_name
+   end
+
 end

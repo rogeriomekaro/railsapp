@@ -1,9 +1,7 @@
 class Comment < ActiveRecord::Base
 
 	belongs_to :idea
-	has_one :user
-
-	attr_accessor :like_count
+	belongs_to :user
 
 	validates :idea_id, :user_id, presence: true
 	validates :body, length: {maximum: 30}, presence: true

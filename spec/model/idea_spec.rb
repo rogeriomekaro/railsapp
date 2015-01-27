@@ -22,18 +22,19 @@ describe Idea do
 	end
 
 	it "should contains a thumb version" do
-		expect(@idea).to_not be_valid
+	    pending("this will be implemented")
+	    raise ""
 	end
 
-	it "should increments likes +1" do
+	it "should increments likes +1" description
 		count = @idea.likes_count
-		@idea.increment_like_count
+		@idea.increment_like_count!
 		expect(@idea.likes_count).to eq(count+1)
 	end
 
 	it "should decrements likes -1" do
 		count = @idea.likes_count
-		@idea.decrement_like_count
+		@idea.decrement_like_count!
 		expect(@idea.likes_count).to eq(count-1)
 	end
 

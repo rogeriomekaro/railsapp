@@ -11,18 +11,24 @@ describe User do
   	end
 
 	it "should have a name with only letters" do
-		@user.name = "222"
+		@user.name = "aaa2222a22a2"
 		expect(@user).to_not be_valid
 	end
 	
 	it "should have a last name with only letters" do
-		@user.last_name = "22"
+		@user.last_name = "aaa2222a22a2"
 		expect(@user).to_not be_valid
 	end
 
 	it "should have a valid email" do
 		@user.email = "roger"
 		expect(@user).to_not be_valid
+	end
+
+	it "should have a valid full name" do
+		@user.name = "rogerio"
+		@user.last_name = "mekaro"
+		expect(@user.full_name).to eq(@user.name + " " + @user.last_name)
 	end
 
 end

@@ -10,7 +10,7 @@ describe Comment do
   		expect(@comment).to be_valid
   	end
 
-	it "should contains no more than 30 chars" do
+	it "should not have a body that contains more than 30 chars" do
 		@comment.body = "zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb"
 		expect(@comment).to_not be_valid
 	end
@@ -23,10 +23,6 @@ describe Comment do
 	end
 
 	context	"associated_keys" do
-		before do
-			@idea = FactoryGirl.create(:idea)
-			@user = FactoryGirl.create(:user)
-		end
 
 		it "should contain a idea associated" do
 			@comment.idea_id = nil

@@ -1,6 +1,0 @@
-class AddLikesCountToIdeas < ActiveRecord::Migration
-  def change
-    add_column :ideas, :likes_count, :integer
-    add_column :ideas, :default, 0
-  end
-end

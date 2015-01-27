@@ -3,7 +3,7 @@ require "rails_helper"
 describe Comment do
 
 	before :all do
-		@comment = FactoryGirl.build(:comment)
+		@comment = create(:comment)
   	end
 
   	it "should have a valid factory" do
@@ -22,6 +22,18 @@ describe Comment do
 		expect(@comment.body).to eq(invalid_body.rstrip) 
 	end
 
+	it "should increments likes +1" do
+		count = @comment.likes_count
+		@comment.increment_like_count!
+		expect(@comment.reload.likes_count).to eq(count+1)
+	end
+
+	it "should decrements likes -1" do
+		count = @comment.likes_count
+		@comment.decrement_like_count!
+		expect(@comment.reload.likes_count).to eq(count-1)
+	end
+
 	context	"associated_keys" do
 
 		it "should contain a idea associated" do
@@ -35,7 +47,5 @@ describe Comment do
 		end
 
 	end
-
-
 
 end

@@ -3,11 +3,11 @@ require "rails_helper"
 describe User do
 	
 	before :all do
-		@user = FactoryGirl.build(:user)		
+		@user = build(:user)		
   	end
 
   	it "should have a valid factory" do
-  		expect(FactoryGirl.build(:user)).to be_valid
+  		expect(build(:user)).to be_valid
   	end
 
 	it "should have a name with only letters" do
@@ -25,10 +25,12 @@ describe User do
 		expect(@user).to_not be_valid
 	end
 
-	it "should have a valid full name" do
-		@user.name = "rogerio"
-		@user.last_name = "mekaro"
-		expect(@user.full_name).to eq(@user.name + " " + @user.last_name)
+	context "full_name" do 
+
+		it "should have a valid full name" do
+			expect(@user.full_name).to eq(@user.name + " " + @user.last_name)
+		end
+
 	end
 
 end

@@ -1,0 +1,23 @@
+= form_for @idea, html: { class: "form form-horizontal idea" } do |f|
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+    = error_span(@idea[:name])
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description, class: 'form-control', required: true
+    = error_span(@idea[:description])
+  .form-group
+    = f.label :picture, class: 'control-label'
+    .controls
+      = f.text_field :picture, class: 'form-control', required: true
+    = error_span(@idea[:picture])
+  .form-group
+    = f.label :user_id, class: 'control-label'
+    .controls
+      = f.text_field :user_id, class: 'form-control', required: true
+    = error_span(@idea[:user_id])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), ideas_path, :class => 'btn btn-default'

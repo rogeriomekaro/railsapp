@@ -14,26 +14,4 @@ class Idea < ActiveRecord::Base
   validates :name, length: {minimum: 5}
   validates :user_id , presence: true
 
-  def increment_like_count
-    increment(:likes_count, 1)
-  end
-
-  def increment_like_count!
-    self.increment_like_count
-    self.update_like_count
-  end
-
-  def decrement_like_count
-    decrement(:likes_count,1)
-  end
-
-  def decrement_like_count!
-    self.decrement_like_count
-    self.update_like_count
-  end
-
-  def update_like_count
-    update_attribute(:likes_count, self.likes_count)
-  end
-
 end

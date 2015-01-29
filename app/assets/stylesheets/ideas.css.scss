@@ -1,3 +1,39 @@
 // Place all the styles related to the ideas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.content{
+  border-radius: 1em;
+  border: 2px solid #ccc;
+}
+
+.idea, .comment{
+	margin: 20px 20px;
+}
+
+.full-name{
+	color: #000080;
+	font-weight:bold;
+}
+
+.idea > .full-name{
+	font-size: 12pt;
+}
+
+.comment > .full-name{
+	font-size: 11pt;
+}
+
+.line{
+	color:#000;
+}
+
+.created-at{
+	font-size: 8pt;
+	color: #DCDCDC;
+}
+
+.a-like, .a-like:hover{
+	color: #1E90FF !important;
+	background: #fff !important;
+}

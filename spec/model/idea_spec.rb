@@ -29,13 +29,13 @@ describe Idea do
 
 	it "should increments likes +1" do
 		count = @idea.likes_count
-		@idea.increment_like_count!
+		@idea.increment!(:likes_count,1)
 		expect(@idea.reload.likes_count).to eq(count+1)
 	end
 
 	it "should decrements likes -1" do
 		count = @idea.likes_count
-		@idea.decrement_like_count!
+		@idea.decrement!(:likes_count,1)
 		expect(@idea.reload.likes_count).to eq(count-1)
 	end
 

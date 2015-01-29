@@ -1,20 +1,23 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
 
+  # GET /ideas/search/
+  def search
+  @ideas = Idea.where(['description LIKE ?', "%#{params[:description]}%"])
+  @comment = Comment.new
+  render "index"
+  end
+
   # GET /ideas
   # GET /ideas.json
   def index
     @ideas = Idea.all
+    @comment = Comment.new
   end
 
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-  end
-
-  # GET /ideas/new
-  def new
-    @idea = Idea.new
   end
 
   # GET /ideas/1/edit

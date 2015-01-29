@@ -24,13 +24,13 @@ describe Comment do
 
 	it "should increments likes +1" do
 		count = @comment.likes_count
-		@comment.increment_like_count!
+		@comment.increment!(:likes_count,1)
 		expect(@comment.reload.likes_count).to eq(count+1)
 	end
 
 	it "should decrements likes -1" do
 		count = @comment.likes_count
-		@comment.decrement_like_count!
+		@comment.decrement!(:likes_count, 1)
 		expect(@comment.reload.likes_count).to eq(count-1)
 	end
 

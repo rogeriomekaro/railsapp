@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   resources :ideas
 
+  post 'ideas/:object_type/like/:id', to: 'likes#create'
+  get 'search/ideas/', to: 'ideas#search'
+
   #root :to => "home#index"
 	
   # The priority is based upon order of creation: first created -> highest priority.

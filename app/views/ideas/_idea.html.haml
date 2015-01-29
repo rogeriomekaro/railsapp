@@ -1,0 +1,50 @@
+.content
+  .idea
+    %p.full-name
+      = idea.user.full_name
+    %p.created-at
+      = " #{idea.created_at.strftime('%d %b. %Y')} às #{idea.created_at.strftime('%H:%M')} "
+    %p.description
+      = idea.description
+    .picture
+      = image_tag idea.picture_url(:thumb) if idea.picture?
+    = link_to 'Like', "ideas/idea/like/#{idea.id}", method: :post, class: "a-like"
+    %hr.line/
+    %p
+      -if idea.likes_count == 0
+        = " "
+      -elsif idea.likes_count == 1                    
+        = "1 person likes this" 
+      -else                                      
+        ="#{idea.likes_count} people like this" 
+    
+  %hr.line/
+  - idea.comments.each do |comment|
+    -if comment.user != nil
+      .comment
+        .full-name
+          = comment.user.full_name
+        %span.body
+          = comment.body
+        %br
+        = " #{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
+        = link_to 'Like', "ideas/comment/like/#{comment.id}", method: :post, class: "a-like"
+        %p
+          -if comment.likes_count == 0
+            = " "
+          -elsif comment.likes_count == 1                    
+            = "1 person likes this" 
+          -else                                      
+            ="#{comment.likes_count} people like this" 
+      %hr.line/
+  = form_for(@comment) do |f|
+    .form-group
+      .controls
+        = f.text_field :body, class: 'form-control', placeholder: "Write a comment"
+      .controls
+        = f.hidden_field :idea_id, class: 'form-control', value: idea.id
+      .controls
+        = f.hidden_field :user_id, class: 'form-control', value: current_user.id
+      %br
+      .actions
+        = f.submit nil, class: 'btn btn-primary'

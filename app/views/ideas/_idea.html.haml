@@ -8,7 +8,7 @@
       = idea.description
     .picture
       = image_tag idea.picture_url(:thumb) if idea.picture?
-    = link_to 'Like', "ideas/idea/like/#{idea.id}", method: :post, class: "a-like"
+    = link_to 'Like', likes_path(object_type: :idea, object_id: idea.id), method: :post, class: "a-like like-idea", id: idea.id
     %hr.line/
     %p
       -if idea.likes_count == 0
@@ -17,25 +17,23 @@
         = "1 person likes this" 
       -else                                      
         ="#{idea.likes_count} people like this" 
-    
   %hr.line/
   - idea.comments.each do |comment|
-    -if comment.user != nil
-      .comment
-        .full-name
-          = comment.user.full_name
-        %span.body
-          = comment.body
-        %br
-        = " #{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
-        = link_to 'Like', "ideas/comment/like/#{comment.id}", method: :post, class: "a-like"
-        %p
-          -if comment.likes_count == 0
-            = " "
-          -elsif comment.likes_count == 1                    
-            = "1 person likes this" 
-          -else                                      
-            ="#{comment.likes_count} people like this" 
+    .comment
+      .full-name
+        = comment.user.full_name
+      %span.body
+        = comment.body
+      %br
+      = " #{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
+      = link_to 'Like', likes_path(object_type: :comment, object_id: comment.id), method: :post, class: "a-like like-comment", id: comment.id
+      %p
+        -if comment.likes_count == 0
+          = " "
+        -elsif comment.likes_count == 1                    
+          = "1 person likes this" 
+        -else                                      
+          ="#{comment.likes_count} people like this" 
       %hr.line/
   = form_for(@comment) do |f|
     .form-group

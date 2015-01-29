@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :comments
-
+  resources :comments, except: [:index, :new]
   resources :ideas
-
-  post 'ideas/:object_type/like/:id', to: 'likes#create'
-  get 'search/ideas/', to: 'ideas#search'
+  resources :likes, only: [:create, :destroy]
 
   #root :to => "home#index"
 	

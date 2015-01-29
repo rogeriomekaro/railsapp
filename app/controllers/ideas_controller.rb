@@ -1,18 +1,16 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
-
-  # GET /ideas/search/
-  def search
-  @ideas = Idea.where(['description LIKE ?', "%#{params[:description]}%"])
-  @comment = Comment.new
-  render "index"
-  end
+  before_action :set_comment, only: [:index, :show]
 
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
-    @comment = Comment.new
+    if params[:description].present?
+      @ideas = Idea.where(['description LIKE ?', "%#{params[:description]}%"])
+    else
+      @ideas = Idea.all
+    end
+
   end
 
   # GET /ideas/1
@@ -69,7 +67,10 @@ class IdeasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_idea
       @idea = Idea.find(params[:id])
-      @comment = @idea.comments.build
+    end
+
+    def set_comment
+      @comment = Comment.new(idea: @idea)      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

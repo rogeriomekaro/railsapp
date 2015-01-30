@@ -1,0 +1,4 @@
+var $html = "#{escape_javascript( render :partial => 'comment', :locals => {:comment => @comment })}"
+$("div#Idea_#{@comment.idea_id}").append($html);
+
+$("#field-comment-#{@comment.idea_id}").val("");

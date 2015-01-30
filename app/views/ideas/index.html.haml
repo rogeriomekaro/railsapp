@@ -2,7 +2,7 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 
-  = form_tag :ideas, method: :get do
+  = form_tag :ideas, method: :get, remote: true do
     = field_set_tag do
       .controls
       = text_field_tag :description
@@ -35,5 +35,5 @@
 
 = link_to t('.new', :default => t("helpers.links.new")), new_idea_path, :class => 'btn btn-primary'
 
-- @ideas.each do |idea|
-  =render partial: "idea", object: idea, as: 'idea'
+.ideas
+  =render partial: "ideas", object: @ideas, as: 'ideas'

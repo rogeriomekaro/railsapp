@@ -1,10 +1,11 @@
 class LikesController < ApplicationController
   before_action :set_object
 
-  def create
+  def create  
     respond_to do |format|
-      if @object.increment!(:likes_count,1)
-        format.html { redirect_to @object, notice: "#{@object.class.name} was successfully liked." }
+      if @object.increment!(:likes_count,1) 
+        @object_name = @object.class.name
+        format.js
       else
         format.html { render :index}
       end

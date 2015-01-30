@@ -1,0 +1,23 @@
+.comment{:id => "Comment_#{comment.id}"}
+  .full-name
+    = comment.user.full_name
+  %span.body
+    = comment.body
+  %br
+  = " #{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
+  = link_to 'Like', likes_path(object_type: :comment, object_id: comment.id), method: :post, class: "a-like like-comment", id: comment.id, remote: true
+  %p
+    .likes-comment
+      -if comment.likes_count == 0
+        %span{:id => "Comment_#{comment.id}"}
+          = "0"
+        = "people like this"
+      -else
+        %span{:id => "Comment_#{comment.id}"}
+          =comment.likes_count
+        -if comment.likes_count == 1
+          = "person likes this" 
+        -else                                      
+          ="people like this" 
+
+%hr.line/

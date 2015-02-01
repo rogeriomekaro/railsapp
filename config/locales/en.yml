@@ -21,3 +21,12 @@
 
 en:
   hello: "Hello world"
+  ideas:
+    idea:
+      likes_count: 
+        one: "1 person likes this"
+        other: "%{count} people like this"
+      comment:
+        likes_count:
+          one: "1 person likes this"
+          other: "%{count} people like this"

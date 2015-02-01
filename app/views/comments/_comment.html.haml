@@ -10,14 +10,9 @@
     .likes-comment
       -if comment.likes_count == 0
         %span{:id => "Comment_#{comment.id}"}
-          = "0"
-        = "people like this"
+        = " "
       -else
         %span{:id => "Comment_#{comment.id}"}
-          =comment.likes_count
-        -if comment.likes_count == 1
-          = "person likes this" 
-        -else                                      
-          ="people like this" 
+          = t('ideas.idea.comment.likes_count', count: comment.likes_count) 
 
 %hr.line/

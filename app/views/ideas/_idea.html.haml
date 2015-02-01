@@ -17,14 +17,10 @@
           = " "
         -else
           %span{:id => "Idea_#{idea.id}"}
-            =idea.likes_count
-          -if idea.likes_count == 1
-            = "person likes this" 
-          -else                                      
-            ="people like this" 
-  %hr.line/
-  - idea.comments.each do |comment|
-    =render partial: "comments/comment", object: comment, as: 'comment'
+            = t('.likes_count', count: idea.likes_count) 
+    %hr.line/
+    - idea.comments.each do |comment|
+      =render partial: comment
 
   = form_for(@comment, remote: true) do |f|
     .form-group

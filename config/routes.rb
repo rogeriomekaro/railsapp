@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :likes
+
   devise_for :users
 
   resources :comments, except: [:index, :new]

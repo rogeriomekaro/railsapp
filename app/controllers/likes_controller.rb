@@ -2,9 +2,11 @@ class LikesController < ApplicationController
   before_action :set_object
 
   def create  
+    like = Like.new(user: current_user, object_id: params[:object_id], object_type: params[:object_type])
+
     respond_to do |format|
-      if @object.increment!(:likes_count,1) 
-        @object_name = @object.class.name
+      if like.save
+        @object.increment!(:likes_count,1) 
         format.js
       else
         format.html { render :index}
@@ -13,10 +15,14 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @object.decrement!(:likes_count,1)
-    respond_to do |format|
-      format.html { redirect_to @object, notice: '#{@object.class.name} was successfully disliked.' }
-      format.json { head :no_content }
+    like = Like.where(user_id:current_user.id, object_type:params[:object_type], object_id:params[:object_id])
+
+    if(like.destroy)
+      if @object.decrement!(:likes_count,1)
+        respond_to do |format|
+          format.js
+        end
+      end
     end
   end
 

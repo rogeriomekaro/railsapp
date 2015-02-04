@@ -6,14 +6,20 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     if params[:description].present?
-      @ideas = Idea.where(['description or name LIKE ?', "%#{params[:description]}%"])
-      respond_to do |format|
-        format.js
-      end
+      @ideas = Idea.where(['description LIKE ? or name LIKE ?', "%#{params[:description]}%", "%#{params[:description]}%"])
     else
       @ideas = Idea.all
     end
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
+  end
+
+  def new
+    @idea = Idea.new
   end
 
   # GET /ideas/1

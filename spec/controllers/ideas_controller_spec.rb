@@ -25,9 +25,7 @@ RSpec.describe IdeasController, :type => :controller do
     end
 
     it "should contains an empty Idea's collection case there isn't ideas " do
-      @ideas.each do |i|
-        i.destroy
-      end
+      @ideas.destroy_all
       get :index, format: :html, status: 200
       expect(assigns(:ideas).to_a).to be_empty
     end
@@ -48,9 +46,7 @@ RSpec.describe IdeasController, :type => :controller do
       xhr :get, :index, {description: "ola"}
       expect(assigns(:ideas)).to match_array(@ideas_will_find)
 
-      @ideas_will_find.each do |i|
-        i.destroy
-      end
+      @ideas_will_find.destroy_all
     end
 
   end

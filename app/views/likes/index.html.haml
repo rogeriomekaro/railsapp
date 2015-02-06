@@ -14,8 +14,8 @@
     - @likes.each do |like|
       %tr
         %td= like.user_id
-        %td= like.object_type
-        %td= like.object_id
+        %td= like.obj_type
+        %td= like.obj_id
         %td= link_to 'Show', like
         %td= link_to 'Edit', edit_like_path(like)
         %td= link_to 'Destroy', like, :method => :delete, :data => { :confirm => 'Are you sure?' }

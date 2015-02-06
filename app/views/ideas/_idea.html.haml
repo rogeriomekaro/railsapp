@@ -1,35 +1,40 @@
-.content
-  .idea{:id => "Idea_#{idea.id}"}
-    %p.full-name
-      = idea.user.full_name
-    %p.created-at
-      = " #{idea.created_at.strftime('%d %b. %Y')} às #{idea.created_at.strftime('%H:%M')} "
-    %p.description
-      = idea.description
-    .picture
-      = image_tag idea.picture_url(:thumb) if idea.picture?
-    = link_to 'Like', likes_path(object_type: :idea, object_id: idea.id), method: :post, class: "a-like like-idea", id: idea.id, remote: true
-    %hr.line/
-    %p
-      .likes-idea
-        -if idea.likes_count == 0
-          %span{:id => "Idea_#{idea.id}"}
-          = " "
-        -else
-          %span{:id => "Idea_#{idea.id}"}
-            = t('.likes_count', count: idea.likes_count) 
-    %hr.line/
-    - idea.comments.each do |comment|
+.idea{:id => "Idea_#{idea.id}"}
+  %p.full-name
+    = idea.user.full_name
+  %p.created-at
+    = " #{idea.created_at.strftime('%d %b. %Y')} às #{idea.created_at.strftime('%H:%M')} "
+  %p.description
+    = idea.description
+  .picture
+    = image_tag idea.picture_url(:thumb) if idea.picture?
+  .like{:id => "Like_Idea_#{idea.id}"}
+    -if idea.likes.where(user_id: current_user.id).count == 0
+      =render partial: "ideas/like", object: idea, as: 'idea'
+    -else
+      =render partial: "ideas/unlike", object: idea, as: 'idea'
+  %hr.line/
+  %p
+    .likes-idea
+      -if idea.likes_count == 0
+        %span{:id => "Idea_#{idea.id}"}
+        = " "
+      -else
+        %span{:id => "Idea_#{idea.id}"}
+          = t('.likes_count', count: idea.likes_count) 
+  %hr.line/
+  - idea.comments.each do |comment|
+    .comment{:id => "Comment_#{comment.id}"}
       =render partial: comment
+    %hr.line/
 
-  = form_for(@comment, remote: true) do |f|
-    .form-group
-      .controls
-        = f.text_field :body, class: 'form-control', placeholder: "Write a comment", id: "field-comment -#{idea.id}"
-      .controls
-        = f.hidden_field :idea_id, class: 'form-control', value: idea.id
-      .controls
-        = f.hidden_field :user_id, class: 'form-control', value: current_user.id
-      %br
-      .actions
-        = f.submit nil, class: 'btn btn-primary'
+= form_for(@comment, remote: true) do |f|
+  .form-group
+    .controls
+      = f.text_field :body, class: 'form-control', placeholder: "Write a comment", id: "field-comment-#{idea.id}"
+    .controls
+      = f.hidden_field :idea_id, class: 'form-control', value: idea.id
+    .controls
+      = f.hidden_field :user_id, class: 'form-control', value: current_user.id
+    %br
+    .actions
+      = f.submit nil, class: 'btn btn-primary'

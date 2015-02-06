@@ -1,0 +1,2 @@
+var $html = "#{ escape_javascript( render partial:'ideas/idea', :locals => { idea: @idea, comment: @comment } ) }"; |
+$("div#Idea_#{@idea.id}").parent().html($html);

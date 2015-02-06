@@ -1,0 +1,3 @@
+-idea.likes.each do |like|
+  -if like.user_id == current_user.id
+    = link_to "Unlike", "likes/#{like.id}", method: :delete, class: "a-like like-idea", id: idea.id, remote: true

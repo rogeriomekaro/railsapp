@@ -4,8 +4,8 @@ RSpec.describe "likes/show", :type => :view do
   before(:each) do
     @like = assign(:like, Like.create!(
       :user_id => 1,
-      :object_type => "Object Type",
-      :object_id => 2
+      :obj_type => "Object Type",
+      :obj_id => 2
     ))
   end
 

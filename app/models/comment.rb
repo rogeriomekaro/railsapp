@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
 	belongs_to :idea
 	belongs_to :user
- 	has_many :likes, as: :object
+ 	# has_many :likes, as: :objects
 
 	validates :idea_id, :user_id, presence: true
 	validates :body, length: {maximum: 30}, presence: true

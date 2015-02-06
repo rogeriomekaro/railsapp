@@ -1,18 +1,20 @@
-.comment{:id => "Comment_#{comment.id}"}
-  .full-name
-    = comment.user.full_name
-  %span.body
-    = comment.body
-  %br
-  = " #{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
-  = link_to 'Like', likes_path(object_type: :comment, object_id: comment.id), method: :post, class: "a-like like-comment", id: comment.id, remote: true
-  %p
-    .likes-comment
-      -if comment.likes_count == 0
-        %span{:id => "Comment_#{comment.id}"}
-        = " "
-      -else
-        %span{:id => "Comment_#{comment.id}"}
-          = t('ideas.idea.comment.likes_count', count: comment.likes_count) 
+.full-name
+  = comment.user.full_name
+%span.body
+  = comment.body
+%br
+= "#{comment.created_at.strftime('%d %b. %Y')} às #{comment.created_at.strftime('%H:%M')} "
+-if comment.likes.where(user_id: current_user.id).count == 0
+  =render partial: "comments/like", object: comment, as: 'comment'
+-else
+  =render partial: "comments/unlike", object: comment, as: 'comment'
+%p
+  .likes-comment
+    -if comment.likes_count == 0
+      %span{:id => "Comment_#{comment.id}"}
+      = " "
+    -else
+      %span{:id => "Comment_#{comment.id}"}
+        = t('ideas.idea.comment.likes_count', count: comment.likes_count) 
 
-%hr.line/
+/ %hr.line/

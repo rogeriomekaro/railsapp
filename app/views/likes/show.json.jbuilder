@@ -1,1 +1,1 @@
-json.extract! @like, :id, :user_id, :object_type, :object_id, :created_at, :updated_at
+json.extract! @like, :id, :user_id, :obj_type, :obj_id, :created_at, :updated_at

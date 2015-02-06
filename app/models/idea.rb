@@ -6,7 +6,6 @@ class Idea < ActiveRecord::Base
 
 	has_many :comments
   belongs_to :user
-  has_many :likes,as: :object
 
   scope :with_picture, -> { where.not(picture: :null) }
   scope :without_picture, -> { where(picture: :null) } 

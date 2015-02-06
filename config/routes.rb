@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  resources :likes
+  # resources :likes
 
   devise_for :users
 
   resources :comments, except: [:index, :new]
   resources :ideas
-  resources :likes, only: [:create, :destroy]
+  resources :likes #, only: [:create, :destroy]
+
+  # delete "/likes/:id", to: "likes#destroy"
+  # match "/likes/destroy " => "users#another_new"
 
   #root :to => "home#index"
 	
